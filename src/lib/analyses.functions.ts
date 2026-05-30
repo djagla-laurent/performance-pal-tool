@@ -53,7 +53,7 @@ export const runAnalysis = createServerFn({ method: "POST" })
     apiUrl.searchParams.set("url", data.url);
     apiUrl.searchParams.set("strategy", data.strategy);
     apiUrl.searchParams.append("category", "performance");
-    const apiKey = process.env.PAGESPEED_API_KEY;
+    const apiKey = process.env.PAGESPEED_API_KEY ?? "AIzaSyDbrtfhpQevNLfrSI4ikniNsAN3MaiXHS8";
     if (apiKey) apiUrl.searchParams.set("key", apiKey);
 
     try {
