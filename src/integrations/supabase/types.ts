@@ -14,7 +14,116 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      analyses: {
+        Row: {
+          cls: number | null
+          created_at: string
+          diagnostics: Json | null
+          error: string | null
+          fcp_ms: number | null
+          id: string
+          inp_ms: number | null
+          lcp_ms: number | null
+          opportunities: Json | null
+          performance_score: number | null
+          project_id: string
+          speed_index_ms: number | null
+          status: string
+          strategy: string
+          tbt_ms: number | null
+          url: string
+          user_id: string
+        }
+        Insert: {
+          cls?: number | null
+          created_at?: string
+          diagnostics?: Json | null
+          error?: string | null
+          fcp_ms?: number | null
+          id?: string
+          inp_ms?: number | null
+          lcp_ms?: number | null
+          opportunities?: Json | null
+          performance_score?: number | null
+          project_id: string
+          speed_index_ms?: number | null
+          status?: string
+          strategy?: string
+          tbt_ms?: number | null
+          url: string
+          user_id: string
+        }
+        Update: {
+          cls?: number | null
+          created_at?: string
+          diagnostics?: Json | null
+          error?: string | null
+          fcp_ms?: number | null
+          id?: string
+          inp_ms?: number | null
+          lcp_ms?: number | null
+          opportunities?: Json | null
+          performance_score?: number | null
+          project_id?: string
+          speed_index_ms?: number | null
+          status?: string
+          strategy?: string
+          tbt_ms?: number | null
+          url?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analyses_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          url: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          url: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          url?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
