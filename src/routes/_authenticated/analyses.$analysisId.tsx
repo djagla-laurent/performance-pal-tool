@@ -41,6 +41,7 @@ function AnalysisPage() {
       if (error) throw error;
       return data;
     },
+    refetchInterval: (query) => query.state.data?.status === "pending" ? 3000 : false,
   });
 
   if (isLoading || !a) {
@@ -75,6 +76,19 @@ function AnalysisPage() {
           </a>
         </div>
       </div>
+
+      {a.status !== "completed" && (
+        <div className="mt-8 rounded-lg border border-border bg-card p-5 text-sm shadow-sm">
+          <div className="font-medium text-foreground">
+            {a.status === "failed" ? "Analyse échouée" : "Analyse en cours"}
+          </div>
+          <p className="mt-1 text-muted-foreground">
+            {a.status === "failed"
+              ? a.error ?? "L'analyse n'a pas pu être finalisée. Relancez-la depuis le projet."
+              : "Les métriques apparaîtront automatiquement dès que le rapport sera terminé."}
+          </p>
+        </div>
+      )}
 
       {/* Header score + summary */}
       <div className="mt-8 grid gap-6 rounded-xl border border-border bg-card p-8 shadow-sm md:grid-cols-[auto_1fr]">
