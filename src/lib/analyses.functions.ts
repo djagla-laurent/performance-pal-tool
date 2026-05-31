@@ -99,7 +99,7 @@ export const runAnalysis = createServerFn({ method: "POST" })
 
       const cls = audits["cumulative-layout-shift"]?.numericValue;
 
-      const { error: updErr } = await supabase
+      const { data: updated, error: updErr } = await supabase
         .from("analyses")
         .update({
           status: "completed",
@@ -113,8 +113,10 @@ export const runAnalysis = createServerFn({ method: "POST" })
           opportunities,
           diagnostics,
         })
-        .eq("id", pending.id);
-      if (updErr) throw new Error(updErr.message);
+        .eq("id", pending.id)
+        .select("id")
+        .single();
+      if (updErr || !updated) throw new Error(updErr?.message ?? "Analysis result could not be saved");
 
       return { analysisId: pending.id };
     } catch (err) {
